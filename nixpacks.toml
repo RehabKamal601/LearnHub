@@ -1,0 +1,9 @@
+[phases.setup]
+cmds = [
+    "cd laravel && composer install --no-dev --optimize-autoloader",
+    "cd laravel && php artisan key:generate",
+    "cd laravel && php artisan config:cache"
+]
+
+[start]
+cmd = "cd laravel && php artisan serve --host=0.0.0.0 --port=$PORT"
