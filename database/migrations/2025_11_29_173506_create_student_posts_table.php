@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('student_posts', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
+        $table->string('title');
+        $table->string('subject');
+        $table->string('education_level');
+        $table->string('location');
+        $table->decimal('budget', 8, 2);
+        $table->text('preferred_schedule');
+        $table->text('description')->nullable();
+        $table->enum('status', ['open', 'matched', 'closed', 'expired'])->default('open');
+        $table->timestamp('expires_at')->nullable();
+        $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('student_posts');
+    }
+};
